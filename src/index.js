@@ -33,16 +33,16 @@ async function onSearch(evt) {
 
 async function onLoadMore() {
   try {
-    const { hits } = apiService.fetchPictures()
+    const { hits } = await apiService.fetchPictures()
     buildMarkupGallery(hits);
-    const { totalHits} = apiService.fetchPictures()
-    
-    if (hits.length === totalHits.length) {
-      loadMoreBtn.classList.remove('is-visible');
-      
+    const {totalHits} = await apiService.fetchPictures()
+    const totalPages = Math.floor(totalHits / 40)
+    if (apiService.page > totalPages) {
+      loadMoreBtn.classList.remove('is-visible')
+      Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
     }
   } catch (error) {
-    Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
+    console.log(error)
   }
 }
 

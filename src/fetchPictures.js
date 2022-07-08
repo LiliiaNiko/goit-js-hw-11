@@ -12,7 +12,7 @@ export default class ApiService {
                 this.page += 1;
                 return {
                     hits: data.hits,
-                    totalHits: data.totalHits   
+                    totalHits: data.totalHits
                 }     
             })    
     }
@@ -27,4 +27,5 @@ export default class ApiService {
     set query(newQuery) {
         this.searchQuery = newQuery;
     }
+   
 }
