@@ -70,5 +70,7 @@
 }
 
 .load-more.is-visible {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    margin: auto;
 }

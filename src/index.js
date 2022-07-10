@@ -16,10 +16,11 @@ async function onSearch(evt) {
   apiService.query = evt.currentTarget.elements.searchQuery.value.trim();
   clearGalleryContainer();
   if (apiService.query === '') {
+    loadMoreBtn.classList.remove('is-visible');
     return Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.')
   }
   apiService.resetPage();
-  loadMoreBtn.classList.remove('is-visible');
+  
   try {
     const { hits } = await apiService.fetchPictures()
       buildMarkupGallery(hits)
