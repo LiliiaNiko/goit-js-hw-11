@@ -13,7 +13,7 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 
 async function onSearch(evt) {
   evt.preventDefault();
-  apiService.query = evt.currentTarget.elements.searchQuery.value;
+  apiService.query = evt.currentTarget.elements.searchQuery.value.trim();
   clearGalleryContainer();
   if (apiService.query === '') {
     return Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.')
@@ -23,7 +23,9 @@ async function onSearch(evt) {
   try {
     const { hits } = await apiService.fetchPictures()
       buildMarkupGallery(hits)
-  
+    if (hits === '') {
+       return Notiflix.Notify.info('Sorry, there are no images matching your search query. Please try again.')
+  } 
       loadMoreBtn.classList.add('is-visible');
   
   } catch (error) {
